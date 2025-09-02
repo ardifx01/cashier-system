@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState,useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
@@ -31,6 +30,51 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Dashboard",
     subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Penjulan Cash",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Penjulan Kredit",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Pembelian",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Biaya",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Stok",
+    path: "/stok",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Customer",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Supplier",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Laporan",
+    path: "/",
+  },
+  {
+    icon: <CalenderIcon />,
+    name: "Back-Up",
+    path: "/",
   },
   {
     icon: <CalenderIcon />,
@@ -309,31 +353,7 @@ const AppSidebar: React.FC = () => {
         }`}
       >
         <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <Image
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-              <Image
-                className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-            </>
-          ) : (
-            <Image
-              src="/images/logo/logo-icon.svg"
-              alt="Logo"
-              width={32}
-              height={32}
-            />
-          )}
+          <h1 className="text-3xl font-bold text-white">ANEKA JAYA</h1>
         </Link>
       </div>
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">

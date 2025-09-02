@@ -5,6 +5,9 @@ import AppHeader from "@/layout/AppHeader";
 import AppSidebar from "@/layout/AppSidebar";
 import Backdrop from "@/layout/Backdrop";
 import React from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function AdminLayout({
   children,
@@ -19,6 +22,28 @@ export default function AdminLayout({
     : isExpanded || isHovered
     ? "lg:ml-[290px]"
     : "lg:ml-[90px]";
+  
+
+  const router = useRouter();
+    useEffect(() => {
+    const fetchDataWithAuth = async () => {
+      // 1. Ambil token dari localStorage
+      const token = localStorage.getItem("token");
+
+      // 2. Periksa apakah token ada
+      if (!token) {
+        toast.info(
+          "Silahkan Login Terlebih Dahulu", {
+            theme: "dark"
+          }
+        );
+        router.push("/signin");
+        return; // Hentikan proses jika tidak ada token
+      }
+    };
+
+    fetchDataWithAuth();
+  }, [router]);
 
   return (
     <div className="min-h-screen xl:flex">
