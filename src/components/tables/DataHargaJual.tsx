@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from "react";
 import React from "react";
 import {
@@ -13,21 +12,14 @@ import Input from "../form/input/InputField";
 import Image from "next/image";
 import clsx from "clsx";
 import Button from "../ui/button/Button";
-import Link from "next/link";
 
 interface Order {
   id: number;
   kd_barang: string;
   nm_barang: string;
-  satuan: string;
-  jenis: string;
-  stok_awal: string;
-  brg_masuk: string;
-  brg_keluar: string;
-  stok_akhir: string;
-  minim: string;
-  hrg_beli: string;
-  tot_hrgbeli: string;
+  hrg_jual: string;
+  hrg_label: string;
+  kd_hrg: string;
 }
 
 // Define the table data using the interface
@@ -36,75 +28,53 @@ const tableData: Order[] = [
     id: 1,
     kd_barang: "000001",
     nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
   },
   {
     id: 2,
     kd_barang: "000001",
     nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
   },
   {
     id: 3,
     kd_barang: "000001",
     nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
   },
   {
     id: 4,
     kd_barang: "000001",
     nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
   },
   {
     id: 5,
     kd_barang: "000001",
     nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
+  },
+  {
+    id: 6,
+    kd_barang: "000001",
+    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
+    hrg_jual: "65.000",
+    hrg_label: "70.000",
+    kd_hrg: "IXN"
   },
 ];
 
-export default function DataStok() {
+export default function DataHargaJual() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
@@ -120,14 +90,6 @@ export default function DataStok() {
             <div className="flex gap-x-2">
               <Input placeholder="Cari Data" className="w-[40%]"></Input>
               <Button size="sm">Cari</Button>
-            </div>
-            <div className="flex gap-x-3">
-              <Link href={"/stok/AddJenis"}>
-                <Button size="sm">Tambah Jenis Barang</Button>
-              </Link>
-              <Link href={"/stok/HargaJualBeli"}>
-                <Button size="sm">Harga Jual/Label</Button>
-              </Link>
             </div>
         </div>
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
@@ -153,55 +115,19 @@ export default function DataStok() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Satuan
+                  Harga Jual
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Jenis
+                  Harga Label
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Stok Awal
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Brg.Masuk
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Brg.Keluar
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Stok Akhir
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Minim
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Hrg.Beli
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Tot.HrgBeli
+                  Kode Harga
                 </TableCell>
               </TableRow>
             </TableHeader>
@@ -217,31 +143,21 @@ export default function DataStok() {
                     {order.nm_barang}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.satuan}
+                    <div className="flex items-center gap-x-1 w-[150px]">
+                        Rp.
+                        <Input defaultValue={order.hrg_jual}></Input>
+                    </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.jenis}
+                    <div className="flex items-center gap-x-1 w-[150px]">
+                        Rp.
+                        <Input defaultValue={order.hrg_label}></Input>
+                    </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.stok_awal}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.brg_masuk}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.brg_keluar}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.stok_akhir}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.minim}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.hrg_beli}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.tot_hrgbeli}
+                    <div className="w-[150px]">
+                        <Input defaultValue={order.hrg_jual}></Input>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

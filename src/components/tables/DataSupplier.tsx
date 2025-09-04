@@ -14,97 +14,56 @@ import Image from "next/image";
 import clsx from "clsx";
 import Button from "../ui/button/Button";
 import Link from "next/link";
+import { PencilIcon, CloseLineIcon } from "@/icons";
 
 interface Order {
   id: number;
-  kd_barang: string;
-  nm_barang: string;
-  satuan: string;
-  jenis: string;
-  stok_awal: string;
-  brg_masuk: string;
-  brg_keluar: string;
-  stok_akhir: string;
-  minim: string;
-  hrg_beli: string;
-  tot_hrgbeli: string;
+  nm_supplier: string;
+  alamat: string;
+  supplier: string;
+  syarat_byr: string;
 }
 
 // Define the table data using the interface
 const tableData: Order[] = [
   {
     id: 1,
-    kd_barang: "000001",
-    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    nm_supplier: "PT ERA",
+    alamat: "Jl.tegal tegal",
+    supplier: "100",
+    syarat_byr: "0",
   },
   {
     id: 2,
-    kd_barang: "000001",
-    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    nm_supplier: "PT.BERCA SPORTINDO",
+    alamat: "JLN CIKINI RAYA JAKARTA",
+    supplier: "102",
+    syarat_byr: "60",
   },
   {
     id: 3,
-    kd_barang: "000001",
-    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    nm_supplier: "CV STAR WAY",
+    alamat: "BANDUNG BANDUNG",
+    supplier: "103",
+    syarat_byr: "30",
   },
   {
     id: 4,
-    kd_barang: "000001",
-    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    nm_supplier: "SINAR JAYA",
+    alamat: "JL IR. SOEKARNO NO 75 BLITAR",
+    supplier: "110",
+    syarat_byr: "0",
   },
   {
     id: 5,
-    kd_barang: "000001",
-    nm_barang: "ABDOMINAL BAND / KORSET AGNESIS",
-    satuan: "PCS",
-    jenis: "00014",
-    stok_awal: '0',
-    brg_masuk: '21',
-    brg_keluar: '7',
-    stok_akhir: '14',
-    minim: '0',
-    hrg_beli: 'Rp.48.834',
-    tot_hrgbeli: 'Rp.683.676',
+    nm_supplier: "FUJI SPORT",
+    alamat: "JL.SAPTA MARGA NO.131 CIBEREUM",
+    supplier: "111",
+    syarat_byr: "0",
   },
 ];
 
-export default function DataStok() {
+export default function DataSupplier() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
@@ -122,17 +81,17 @@ export default function DataStok() {
               <Button size="sm">Cari</Button>
             </div>
             <div className="flex gap-x-3">
-              <Link href={"/stok/AddJenis"}>
-                <Button size="sm">Tambah Jenis Barang</Button>
+              <Link href={"/supplier/add"}>
+                <Button size="sm">Tambah Supplier</Button>
               </Link>
-              <Link href={"/stok/HargaJualBeli"}>
-                <Button size="sm">Harga Jual/Label</Button>
+              <Link href={"/supplier"}>
+                <Button size="sm">Cetak Supplier</Button>
               </Link>
             </div>
         </div>
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
-        <div className="min-w-[1102px]">
+        <div className="min-w-[800px]">
           <Table>
             {/* Table Header */}
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
@@ -141,67 +100,37 @@ export default function DataStok() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Kode Brg
+                  No
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Nama Barang
+                  Nama Supplier
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Satuan
+                  Alamat
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Jenis
+                  #Supplier
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Stok Awal
+                  Syarat Bayar
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Brg.Masuk
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Brg.Keluar
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Stok Akhir
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Minim
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Hrg.Beli
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Tot.HrgBeli
+                  Action
                 </TableCell>
               </TableRow>
             </TableHeader>
@@ -211,37 +140,30 @@ export default function DataStok() {
               {currentItems.map((order) => (
                 <TableRow key={order.id}>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.kd_barang}
+                    {order.id}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.nm_barang}
+                    {order.nm_supplier}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.satuan}
+                    {order.alamat}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.jenis}
+                    {order.supplier}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.stok_awal}
+                    {order.syarat_byr}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.brg_masuk}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.brg_keluar}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.stok_akhir}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.minim}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.hrg_beli}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.tot_hrgbeli}
+                    <div className="flex">
+                        <Link href={`/supplier/edit?id=${order.id}`}>
+                            <PencilIcon/>
+                        </Link>
+                        <span className="border border-gray-500 mr-[6px] ml-[3px]"></span>
+                        <button className={"text-red-800 cursor-pointer"}>
+                            <CloseLineIcon/>
+                        </button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

@@ -15,6 +15,7 @@ import {
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
+  FolderIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
 
@@ -44,7 +45,7 @@ const navItems: NavItem[] = [
   {
     icon: <CalenderIcon />,
     name: "Pembelian",
-    path: "/",
+    path: "/pembelian",
   },
   {
     icon: <CalenderIcon />,
@@ -52,7 +53,7 @@ const navItems: NavItem[] = [
     path: "/",
   },
   {
-    icon: <CalenderIcon />,
+    icon: <FolderIcon />,
     name: "Stok",
     path: "/stok",
   },
@@ -64,7 +65,7 @@ const navItems: NavItem[] = [
   {
     icon: <CalenderIcon />,
     name: "Supplier",
-    path: "/",
+    path: "/supplier",
   },
   {
     icon: <CalenderIcon />,
