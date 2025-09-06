@@ -4,29 +4,51 @@ import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
 import React, { useState } from "react";
+import { useAuth } from "./auth"; // Import hook useAuth
+import { toast } from "react-toastify";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth(); // Ambil fungsi login dari context
+  const [username, setUsername] = useState(""); // State input username
+  const [password, setPassword] = useState(""); // State input password
+
+  // Fungsi handle submit form
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Cegah reload halaman
+    try {
+      await login(username, password); // Panggil login
+      toast.success("Login successful");
+    } catch {
+      toast.error("Username & Password Invalid"); // Set error jika gagal
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 lg:w-1/2 w-full">
-      <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
+    <div className="flex w-full flex-1 flex-col lg:w-1/2">
+      <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
         <div>
           <div className="mb-5 sm:mb-8">
-            <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
+            <h1 className="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
               Login
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Masukkan nama user dan password untuk login
+              Masukkan email dan password untuk login
             </p>
           </div>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="space-y-6">
                 <div>
                   <Label>
-                    Nama User <span className="text-error-500">*</span>{" "}
+                    Email <span className="text-error-500">*</span>{" "}
                   </Label>
-                  <Input placeholder="Masukkan Nama user" type="text" />
+                  <Input
+                    placeholder="Masukkan Email Anda"
+                    type="email"
+                    defaultValue={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label>
@@ -35,11 +57,13 @@ export default function SignInForm() {
                   <div className="relative">
                     <Input
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
+                      placeholder="Masukkan Password Anda"
+                      defaultValue={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                      className="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer"
                     >
                       {showPassword ? (
                         <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
@@ -50,7 +74,7 @@ export default function SignInForm() {
                   </div>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
+                  <Button className="w-full" size="sm" type="submit">
                     Login
                   </Button>
                 </div>
